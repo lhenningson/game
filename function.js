@@ -19,7 +19,7 @@ function drawStart() {
     ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
   
     // Helicopter
-    ctx.drawImage(heliImg, 200, 250);
+    ctx.drawImage(heliImg, heli.x, heli.y);
   
     // Start Text
     ctx.font = "40px Consolas";
@@ -32,7 +32,36 @@ function drawStart() {
   }
   
   // Draw Game Elements
-  function drawGame() {
+function runGame() {
+  // LOGIC
+  moveHeli();
+
+  // DRAW
+  drawGame();
+}
+
+function moveHeli() {
+ // Accelerate upwards
+ if (mouseispressed) {
+  heli.speed += -1;
+ }
+
+ // Apply Gravity
+ heli.speed += heli.accel;
+
+ // Constrain Speed
+ if (heli.speed > 5) {
+  heli.speed = 5;
+ } else if (heli.speed < -5) {
+  heli.speed = -5;
+ }
+
+ // Move Helicopter by its speed
+ heli.y += heli.speed;
+
+}
+
+function drawGame() {
     // Background
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
@@ -50,7 +79,7 @@ function drawStart() {
     ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
   
     // Helicopter
-    ctx.drawImage(heliImg, 200, 250);
+    ctx.drawImage(heliImg, heli.x, heli.y);
   
     // Draw Wall 1
     ctx.fillStyle = "green";
@@ -76,7 +105,7 @@ function drawStart() {
     ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
   
     // Helicopter
-    ctx.drawImage(heliImg, 200, 250);
+    ctx.drawImage(heliImg, heli.x, heli.y);
   
     // Draw Wall 1
     ctx.fillStyle = "green";

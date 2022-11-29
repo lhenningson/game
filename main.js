@@ -12,6 +12,14 @@ heliImg.src = "img/heliBlueTransparent.png";
 
 let state = "start";
 let mouseispressed = false;
+let heli = {
+  x: 200,
+  y: 250,
+  w: 80,
+  h: 40,
+  speed: 0,
+  accel: 0.7
+}
 
 // Draw Function
 window.addEventListener("load", draw);
@@ -20,7 +28,7 @@ function draw() {
   if (state === "start") {
      drawStart();
 } else if (state === "gameon") {
-     drawGame();
+     runGame();
 } else if (state === "gameover") {
      drawGameOver();
 }
@@ -43,5 +51,6 @@ mouseispressed = true;
 }
 
 function mouseupHandler() {
+  mouseispressed = false;
 
 }
