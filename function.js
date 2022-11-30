@@ -2,24 +2,8 @@
 
 // Draw Start Screen
 function drawStart() {
-    // Background
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, cnv.width, cnv.height);
-  
-    // Green Bars
-    ctx.fillStyle = "green";
-    ctx.fillRect(0, 0, cnv.width, 50);
-    ctx.fillRect(0, cnv.height - 50, cnv.width, 50);
-  
-    // Green Bar Text
-    ctx.font = "30px Consolas";
-    ctx.fillStyle = "black";
-    ctx.fillText("HELICOPTER GAME", 25, 35);
-    ctx.fillText("DISTANCE: 0", 25, cnv.height - 15);
-    ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
-  
-    // Helicopter
-    ctx.drawImage(heliImg, heli.x, heli.y);
+
+  drawMainComponents();
   
     // Start Text
     ctx.font = "40px Consolas";
@@ -35,6 +19,8 @@ function drawStart() {
 function runGame() {
   // LOGIC
   moveHeli();
+
+  movewalls();
 
   // DRAW
   drawGame();
@@ -61,55 +47,38 @@ function moveHeli() {
 
 }
 
+function movewalls() {
+
+  wall1.x += -3;
+  if (wall1.x + wall1.w < 0) {
+    wall1.x = wall3.x + 500;
+    wall1.y = Math.random() * 300 + 100;
+  }
+
+  wall2.x += -3;
+  if (wall2.x + wall2.w < 0) {
+    wall2.x = wall1.x + 500;
+    wall2.y = Math.random() * 300 + 100;
+  }
+
+  wall3.x += -3;
+  if (wall3.x + wall3.w < 0) {
+    wall3.x = wall2.x + 500;
+    wall3.y = Math.random() * 300 + 100;
+  }
+}
 function drawGame() {
-    // Background
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, cnv.width, cnv.height);
-  
-    // Green Bars
-    ctx.fillStyle = "green";
-    ctx.fillRect(0, 0, cnv.width, 50);
-    ctx.fillRect(0, cnv.height - 50, cnv.width, 50);
-  
-    // Green Bar Text
-    ctx.font = "30px Consolas";
-    ctx.fillStyle = "black";
-    ctx.fillText("HELICOPTER GAME", 25, 35);
-    ctx.fillText("DISTANCE: 0", 25, cnv.height - 15);
-    ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
-  
-    // Helicopter
-    ctx.drawImage(heliImg, heli.x, heli.y);
-  
-    // Draw Wall 1
-    ctx.fillStyle = "green";
-    ctx.fillRect(700, 200, 50, 100);
+    drawMainComponents();
+    drawWalls();
   }
   
   // Draw Game Over Screen
   function drawGameOver() {
-    // Background
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, cnv.width, cnv.height);
+    // draw things
+    drawMainComponents();
   
-    // Green Bars
-    ctx.fillStyle = "green";
-    ctx.fillRect(0, 0, cnv.width, 50);
-    ctx.fillRect(0, cnv.height - 50, cnv.width, 50);
-  
-    // Green Bar Text
-    ctx.font = "30px Consolas";
-    ctx.fillStyle = "black";
-    ctx.fillText("HELICOPTER GAME", 25, 35);
-    ctx.fillText("DISTANCE: 0", 25, cnv.height - 15);
-    ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
-  
-    // Helicopter
-    ctx.drawImage(heliImg, heli.x, heli.y);
-  
-    // Draw Wall 1
-    ctx.fillStyle = "green";
-    ctx.fillRect(700, 200, 50, 100);
+    // Draw Walls 
+    drawWalls();
   
     // Circle around Helicopter
     ctx.strokeStyle = "red";
@@ -122,4 +91,31 @@ function drawGame() {
     ctx.font = "40px Consolas";
     ctx.fillStyle = "lightblue";
     ctx.fillText("GAME OVER", 350, 285);
+  }
+
+  function drawWalls() {
+    ctx.fillStyle = "green";
+    ctx.fillRect(wall1.x, wall1.y, wall1.w, wall1.h);
+    ctx.fillRect(wall2.x, wall2.y, wall2.w, wall2.h);
+    ctx.fillRect(wall3.x, wall3.y, wall3.w, wall3.h);
+  }
+  function drawMainComponents() {
+    // Background
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, cnv.width, cnv.height);
+  
+    // Green Bars
+    ctx.fillStyle = "green";
+    ctx.fillRect(0, 0, cnv.width, 50);
+    ctx.fillRect(0, cnv.height - 50, cnv.width, 50);
+  
+    // Green Bar Text
+    ctx.font = "30px Consolas";
+    ctx.fillStyle = "black";
+    ctx.fillText("HELICOPTER GAME", 25, 35);
+    ctx.fillText("DISTANCE: 0", 25, cnv.height - 15);
+    ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
+  
+    // Helicopter
+    ctx.drawImage(heliImg, heli.x, heli.y);
   }
