@@ -8,39 +8,23 @@ cnv.height = 600;
 
 // Global Variables
 let heliImg = document.createElement("img");
+
 heliImg.src = "img/heliBlueTransparent.png";
 
-let state = "start";
+let explosion = document.createElement("audio");
+explosion.scr = "sound/explosion.wav";
+
+let propeller = document.createElement("audio");
+propeller.scr = "sound/propeller.wav";
+
 let mouseispressed = false;
-let heli = {
-  x: 200,
-  y: 250,
-  w: 80,
-  h: 40,
-  speed: 0,
-  accel: 0.7
-}
 
-let wall1 = {
-  x: cnv.width,
-  y: Math.random() * 300 + 100,
-  w: 50,
-  h: 100
-} 
+let state;
+let heli;
+let wall1, wall2, wall3;
+reset();
 
-let wall2 = {
-  x: cnv.width + 500,
-  y: Math.random() * 300 + 100,
-  w: 50,
-  h: 100
-}
 
-let wall3 = {
-  x: cnv.width + 1000,
-  y: Math.random() * 300 + 100,
-  w: 50,
-  h: 100
-}
 
 
 // Draw Function

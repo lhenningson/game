@@ -22,6 +22,8 @@ function runGame() {
 
   movewalls();
 
+  checkCollisions();
+
   // DRAW
   drawGame();
 }
@@ -67,6 +69,33 @@ function movewalls() {
     wall3.y = Math.random() * 300 + 100;
   }
 }
+
+function checkCollisions() {
+  if (heli.y < 50) {
+    gameOver();
+  } else if (heli.y > 510) {
+    gameOver();
+  }
+
+  if (heli.x + 80 > wall1.x && heli.x < wall1.x + 50 && heli.y > wall1.y && heli.y < wall1.y + 100) {
+    gameOver();
+  }
+  if (heli.x + 80 > wall2.x && heli.x < wall2.x + 50 && heli.y > wall2.y && heli.y < wall2.y + 100) {
+    gameOver();
+  }
+  if (heli.x + 80 > wall3.x && heli.x< wall3.x + 50 && heli.y > wall3.y && heli.y < wall3.y + 100) {
+    gameOver();
+  }
+}
+
+function gameOver() {
+  explosion.play();
+
+  state = "gameover";
+
+  setTimeout(reset, 2000);
+}
+
 function drawGame() {
     drawMainComponents();
     drawWalls();
@@ -84,13 +113,50 @@ function drawGame() {
     ctx.strokeStyle = "red";
     ctx.lineWidth = 5;
     ctx.beginPath();
-    ctx.arc(240, 270, 60, 0, 2 * Math.PI);
+    ctx.arc(heli.x + heli.w / 2, heli.y + heli.h / 2, 60, 0, 2 * Math.PI);
     ctx.stroke();
   
     // Game Over Text
     ctx.font = "40px Consolas";
     ctx.fillStyle = "lightblue";
     ctx.fillText("GAME OVER", 350, 285);
+  }
+
+  function reset() {
+    state = "start";
+
+  
+    mouseispressed = false;
+    heli = {
+  x: 200,
+  y: 250,
+  w: 80,
+  h: 40,
+  speed: 0,
+  accel: 0.7
+};
+
+ wall1 = {
+  x: cnv.width,
+  y: Math.random() * 300 + 100,
+  w: 50,
+  h: 100
+}; 
+
+ wall2 = {
+  x: cnv.width + 500,
+  y: Math.random() * 300 + 100,
+  w: 50,
+  h: 100
+};
+
+ wall3 = {
+  x: cnv.width + 1000,
+  y: Math.random() * 300 + 100,
+  w: 50,
+  h: 100
+};
+
   }
 
   function drawWalls() {
