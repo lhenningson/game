@@ -26,6 +26,7 @@ function runGame() {
 
   // DRAW
   drawGame();
+  
 }
 
 function moveHeli() {
@@ -77,13 +78,13 @@ function checkCollisions() {
     gameOver();
   }
 
-  if (heli.x + 80 > wall1.x && heli.x < wall1.x + 50 && heli.y > wall1.y && heli.y < wall1.y + 100) {
+  if (heli.x + 80 > wall1.x && heli.x < wall1.x + 50 && heli.y > wall1.y - 40 && heli.y < wall1.y + 100) {
     gameOver();
   }
-  if (heli.x + 80 > wall2.x && heli.x < wall2.x + 50 && heli.y > wall2.y && heli.y < wall2.y + 100) {
+  if (heli.x + 80 > wall2.x && heli.x < wall2.x + 50 && heli.y > wall2.y - 40 && heli.y < wall2.y + 100) {
     gameOver();
   }
-  if (heli.x + 80 > wall3.x && heli.x< wall3.x + 50 && heli.y > wall3.y && heli.y < wall3.y + 100) {
+  if (heli.x + 80 > wall3.x && heli.x < wall3.x + 50 && heli.y > wall3.y - 40 && heli.y < wall3.y + 100) {
     gameOver();
   }
 }
@@ -179,7 +180,7 @@ function drawGame() {
     ctx.font = "30px Consolas";
     ctx.fillStyle = "black";
     ctx.fillText("HELICOPTER GAME", 25, 35);
-    ctx.fillText("DISTANCE: 0", 25, cnv.height - 15);
+    ctx.fillText("DISTANCE: 0" , 25, cnv.height - 15);
     ctx.fillText("BEST: 0", cnv.width - 250, cnv.height - 15);
   
     // Helicopter
